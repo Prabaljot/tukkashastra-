@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TukkaShastra</title>
+    <link rel="stylesheet" href="static/output.css">
+    <style>
+        .cursor {
+            display: inline-block;
+            width: 2px;
+            height: 2.5rem;
+            background-color: white;
+            animation: blink 0.7s step-end infinite;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        .auto-type-text {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 font-sans">
+
+    <!-- Navbar -->
+    <nav class="bg-blue-600 p-4 shadow-md">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="text-white text-xl font-bold">
+                TukkaShastra
+            </div>
+            <div class="flex text-lg space-x-6 text-white">
+                <a href="index.html" class="hover:text-yellow-300 hover:scale-110">Home</a>
+                <a href="#about" class="hover:text-yellow-300 hover:scale-110">About</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="h-52 md:h-64 bg-cover bg-center bg-no-repeat" style="background-image: url('static/blackboard.jpg');">
+        <div class="max-w-7xl mx-auto p-8 ">
+            <h1 class="text-5xl text-center font-bold text-white">
+                Welcome to
+                <span id="auto-type-text" class="auto-type-text"></span><span class="cursor"></span>
+            </h1>
+        </div>
+    </div>
+
+    <!-- Subject Cards -->
+    <div class="max-w-7xl mx-auto px-6 py-10">
+        <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Explore Subjects</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            <a href="static/maths.pdf"
+                class="bg-white shadow-md hover:shadow-lg transition rounded-xl p-6 text-center text-blue-800 font-semibold text-2xl hover:bg-blue-100">Maths</a>
+            <a href="static/eng.pdf"
+                class="bg-white shadow-md hover:shadow-lg transition rounded-xl p-6 text-center text-green-800 font-semibold text-2xl hover:bg-green-100">English</a>
+            <a href="static/hindi.pdf"
+                class="bg-white shadow-md hover:shadow-lg transition rounded-xl p-6 text-center text-red-800 font-semibold text-2xl hover:bg-red-100">Hindi</a>
+            <a href="static/sst.pdf"
+                class="bg-white shadow-md hover:shadow-lg transition rounded-xl p-6 text-center text-yellow-700 font-semibold text-2xl hover:bg-yellow-100">SST</a>
+            <a href="static/sci.pdf"
+                class="bg-white shadow-md hover:shadow-lg transition rounded-xl p-6 text-center text-purple-800 font-semibold text-2xl hover:bg-purple-100">Science</a>
+            <a href="static/ai.pdf"
+                class="bg-white shadow-md hover:shadow-lg transition rounded-xl p-6 text-center text-pink-800 font-semibold text-2xl hover:bg-pink-100">AI</a>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <div class="bg-white py-12 px-6" id="about">
+        <div class="max-w-4xl mx-auto text-center">
+            <img class="w-32 h-32 mx-auto rounded-full bg-gray-300 mb-6" src='static/prabal.jpg' alt=''></img>
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">About Me</h2>
+            <p class="text-lg text-gray-600 leading-relaxed">
+                Hey there! 👋 I'm <b>Prabaljot</b> the creator of <b>TukkaShastra</b> — a fun, brainy space for students who believe in
+                mastering the art of intelligent guesses, aka <i>*tukkas*!</i> Whether you're prepping for school exams or just
+                vibing with cool educational content, this platform is my little way of making learning feel less boring
+                and more legendary. 😎📚
+            </p>
+        </div>
+    </div>
+
+
+    <!-- Auto Typing Effect -->
+    <script>
+        const words = ["Tukka Shastra!", "Your World!", "World of Tukkas!", "Knowledge Hub!"];
+        let wordIndex = 0;
+        let charIndex = 0;
+        const speed = 50;
+        const eraseSpeed = 50;
+        const textElement = document.getElementById('auto-type-text');
+
+        function typeWriter() {
+            if (charIndex < words[wordIndex].length) {
+                textElement.innerHTML += words[wordIndex].charAt(charIndex);
+                charIndex++;
+                setTimeout(typeWriter, speed);
+            } else {
+                setTimeout(eraseText, 1000);
+            }
+        }
+
+        function eraseText() {
+            if (charIndex > 0) {
+                textElement.innerHTML = words[wordIndex].substring(0, charIndex - 1);
+                charIndex--;
+                setTimeout(eraseText, eraseSpeed);
+            } else {
+                wordIndex = (wordIndex + 1) % words.length;
+                setTimeout(typeWriter, 500);
+            }
+        }
+
+        window.onload = () => {
+            typeWriter();
+        };
+    </script>
+
+</body>
+
+</html>
